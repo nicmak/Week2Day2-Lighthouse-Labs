@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<header>
+<head>
+
+</head>
+<body>
+  <% include ./partials/_header%></header>
+
+
+    <table style="width:100%">
+      <thead>
+        <tr>
+          <th>ShortURL</th>
+          <th>FullURL</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td><%=shortURL%></td>
+            <td><a href="<%= longURL %>"><%=longURL%></a></td>
+            <td><form method="POST" action="/urls/<%=shortURL%>/delete">
+              <Input Type="submit" Value="Delete Link">
+            </form></td>
+            <td><form action="/urls/<%=shortURL%>/edit1" method="POST" style="margin:50px;">
+              <label for="longURL"> Edit URL:</label>
+              <input id="longURL" type="text" name="longURL" placeholder= <%=longURL%> style="width: 300px">
+              <input type="submit" value="Update">
+            </form></td>
+          </tr>
+      </tbody>
+    </table>
+
+
+</body>
+</html>

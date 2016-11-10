@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TinyApp</title>
+</head>
+<body>
+  <header><% include ./partials/_header %></header>
+
+    <table style="width:100%">
+      <thead>
+        <tr>
+          <th>ShortURL</th>
+          <th>URL</th>
+          <th>Buttons</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let shortURL in urls) { %>
+          <tr>
+            <td><%=shortURL%></td>
+            <td><form action="/urls/<%=shortURL%>/edit1" method="POST" style="margin:20px;">
+              <label for="longURL"> Edit URL:</label>
+              <input id="longURL" type="text" name="longURL" placeholder = <%=urls[shortURL]%> style="width: 300px">
+              <input type="submit" value="Update">
+            </form></td>
+            <td>
+              <form method="POST" action="/urls/<%=shortURL%>/delete">
+              <Input Type="submit" Value="Delete Button">
+            </form>
+
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+</body>
+</html>
