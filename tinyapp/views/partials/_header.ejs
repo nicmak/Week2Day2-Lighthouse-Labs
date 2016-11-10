@@ -1,1 +1,12 @@
-TinyApp Headers
+TinyApp
+
+
+
+
+
+<!--!username means falsy so that gives u a blank value... -->
+<% if (!username) { %>
+   <form action="/login" method="POST" style="margin:20px;"><label> Username:</label><input type="text" name="username"  style="width: 300px"><input type="submit" value="Login"></form>
+<%} else { %>
+     <form action="/logout" method="POST" style="margin:20px;"><input type="submit" value="Logout"></form>
+   <% } %>

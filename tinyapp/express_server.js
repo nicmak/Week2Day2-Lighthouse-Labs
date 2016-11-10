@@ -1,13 +1,30 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 8080; // default port 8080
+const cookieParser = require('cookie-parser')
+app.use(cookieParser());
 
 app.set('view engine', 'ejs');//This tells Express app to take EJS as its templating engine
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({extended: true})); //use mounts the middleware function or specified function
 //Setting view engine to ejs
 const urlDatabase = {
   "b2xVn2": "http://www.lighthouselabs.ca",
   "9sm5xK": "http://www.google.com"
 };
+
+
+app.post("/login", (req, res) => {
+  res.cookie("username",req.body.username);
+  res.redirect("/urls")
+
+});
+
+app.post("/logout", (req, res) => {
+  res.clearCookie("username");
+  res.redirect("/urls")
+});
+
 app.get("/", (req, res) => {
   res.end("Hello!");
 });
@@ -19,9 +36,12 @@ app.get("/hello", (req, res) => {
 });
 //
 app.get("/urls", (req, res) => { //NOT SURE WHAT THIS DOES
-  let templateVars = { urls: urlDatabase };
+  let templateVars = { urls: urlDatabase,
+  username: req.cookies["username"] };
   //let deleteLink = "urls/:shortURL/delete"
   res.render("urls_index", templateVars)
+
+
 });
   //Renders a view/ then sends HTML rendered to client
   //first argument, is name of ejs file.
@@ -29,8 +49,6 @@ app.get("/urls", (req, res) => { //NOT SURE WHAT THIS DOES
 app.get("/urls/new", (req, res) => {
   res.render("urls_new");
 });
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({extended: true})); //use mounts the middleware function or specified function
 // for parsing application/x-www-form-urlencoded
 function generateRandomString(length, chars) {
   let result = '';
