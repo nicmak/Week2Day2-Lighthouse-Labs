@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-</head>
+<head></head>
 <body>
+  <a>WELCOME: <%=email%></a>
   <% include ./partials/_header %>
+  <a>Link for shortening URLs</a>
+
 
     <table style="width:100%">
-      <b>Logged in: <%=username%></b>
       <thead>
-
         <tr>
-
           <th>ShortURL</th>
           <th>URL</th>
-          <th>Buttons</th>
+          <th>Options</th>
         </tr>
       </thead>
       <tbody>
+
         <% for (let shortURL in urls) { %>
           <tr>
             <td><%=shortURL%></td>
-            <td><form action="/urls/<%=shortURL%>/edit1" method="POST" style="margin:20px;">
-              <label for="longURL"> Edit URL:</label>
-              <input id="longURL" type="text" name="longURL" placeholder = <%=urls[shortURL]%> style="width: 300px">
-              <input type="submit" value="Update">
-            </form></td>
-            <td>
-              <form method="POST" action="/urls/<%=shortURL%>/delete">
-              <Input Type="submit" Value="Delete Button">
-            </form>
-
+            <td><a href="<%=urls[shortURL]%>"><%=urls[shortURL]%></a></td>
+            <% if (email) { %>
+            <td><form method="POST" action="/urls/<%=shortURL%>/delete">
+                <input type="submit" input value="Delete">
+                </form>
             </td>
           </tr>
         <% } %>
+        <% } %>
       </tbody>
     </table>
+    <form method="GET" action="/urls/new">
+        <input type="submit" input value="Add URL">
+    </form>
 </body>
 </html>

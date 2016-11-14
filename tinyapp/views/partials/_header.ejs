@@ -1,12 +1,16 @@
 TinyApp
 
 
-
-
-
-<!--!username means falsy so that gives u a blank value... -->
-<% if (!username) { %>
-   <form action="/login" method="POST" style="margin:20px;"><label> Username:</label><input type="text" name="username"  style="width: 300px"><input type="submit" value="Login"></form>
+<% if (!email) { %>
+<a href ="/login">Click Here to Login</a>
+<a href="/register">Click Here to Register</a>
 <%} else { %>
-     <form action="/logout" method="POST" style="margin:20px;"><input type="submit" value="Logout"></form>
-   <% } %>
+<%email%>
+<form action="/urls" method="GET" name="email"></form>
+<form action="/urls/:id" method="GET" name="email"></form>
+<form action="/urls/new" method="GET" name="email"></form>
+<form action="/logout" method="POST">
+  <input type = "submit" value="Logout">
+</form>
+
+<% } %>
